@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery | Beauty Salon</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+    }
+
+    .gallery-header {
+      text-align: center;
+      padding: 60px 20px 20px;
+    }
+
+    .gallery-header h1 {
+      font-size: 2.5rem;
+    }
+
+    .filters {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .filters button {
+      margin: 5px;
+      padding: 10px 20px;
+      border: none;
+      background: #000;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 20px;
+      transition: 0.3s;
+    }
+
+    .filters button:hover {
+      background: #444;
+    }
+    
+.category-booking {
+  text-align: center;
+  margin: 15px 0;
+}
+
+.category-booking .btn {
+  background: gold;
+  color: black;
+  padding: 10px 25px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 6 per row */
+  gap: 10px;
+  padding: 20px;
+}
+
+.gallery img {
+  width: 100%;
+  height: 160px; /* medium height */
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+    
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    /* LIGHTBOX */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 999;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 70vh;
+      border-radius: 10px;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 30px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .lightbox .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 40px;
+      color: white;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .lightbox .prev {
+      left: 20px;
+    }
+
+    .lightbox .next {
+      right: 20px;
+    }
+
+    .caption {
+      color: #fff;
+      margin-top: 10px;
+    }
+    
+/* TABLET */
+@media (max-width: 1024px) {
+  .gallery {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+    
+  </style>
+</head>
+
+<body>
+  
+  <!-- NAVBAR -->
+  <nav>
+    <h2 class="logo">Velvet Touch</h2>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="booking.html">Book</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="burger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <div class="gallery-header">
+    <h1>Explore beautiful styles</h1>
+    <p></p>
+  </div>
+
+  <!-- FILTER BUTTONS -->
+  <div class="filters">
+    <button onclick="filterImages('all')">All</button>
+    <button onclick="filterImages('hair')">Hair</button>
+    <button onclick="filterImages('nails')">Nails</button>
+    <button onclick="filterImages('makeup')">Makeup</button>
+  </div>
+
+<div class="category-booking">
+  <a href="booking.html" id="bookCategoryBtn" class="btn">
+    Book Appointment
+  </a>
+</div>
+
+  <!-- GALLERY GRID -->
+  <div class="gallery">
+
+    <!-- HAIR -->
+    <img src="images/braids.jpg" class="item hair" loading="lazy" onclick="openLightbox(0)" alt="Braids">
+    <img src="images/wigs.jpg" class="item hair" loading="lazy" onclick="openLightbox(1)" alt="Wig">
+    <img src="images/wigs 1.jpg" class="item hair" loading="lazy" onclick="openLightbox(1)" alt="Wig">
+    <img src="images/wigs 2.jpg" class="item hair" loading="lazy" onclick="openLightbox(1)" alt="Wig">
+
+    
+    
+    <!-- NAILS -->
+    <img src="images/nails 1.jpg" class="item nails" loading="lazy" onclick="openLightbox(2)" alt="Nails">
+    <img src="images/nails 2.jpg" class="item nails" loading="lazy" onclick="openLightbox(3)" alt="Nails">
+    <img src="images/nails 3.jpg" class="item nails" loading="lazy" onclick="openLightbox(3)" alt="Nails">
+    <img src="images/nails 4.jpg" class="item nails" loading="lazy" onclick="openLightbox(3)" alt="Nails">
+
+    <!-- MAKEUP -->
+    <img src="images/makeup 1.jpg" class="item makeup" loading="lazy" onclick="openLightbox(4)" alt="Makeup">
+    <img src="images/makeup 2.jpg" class="item makeup" loading="lazy" onclick="openLightbox(4)" alt="Makeup">
+    <img src="images/makeup 3.jpg" class="item makeup" loading="lazy" onclick="openLightbox(4)" alt="Makeup">
+    <img src="images/makeup 4.jpg" class="item makeup" loading="lazy" onclick="openLightbox(4)" alt="Makeup">
+
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <span class="close" onclick="closeLightbox()">&times;</span>
+    <span class="nav prev" onclick="changeSlide(-1)">&#10094;</span>
+    <img id="lightbox-img">
+    <span class="nav next" onclick="changeSlide(1)">&#10095;</span>
+    <div class="caption" id="caption"></div>
+  </div>
+
+
+
+<script>
+  const burger = document.querySelector('.burger');
+  const nav = document.querySelector('nav ul.nav-links');
+  
+  burger.addEventListener('click', () => {
+    nav.classList.toggle('active');
+  });
+</script>
+
+
+
+
+<script>
+  // SELECT ELEMENTS
+  const items = document.querySelectorAll('.gallery .item');
+  const bookBtn = document.getElementById('bookCategoryBtn');
+  
+  // DEFAULT STATE (ALL)
+  function setDefault() {
+    items.forEach(item => {
+      item.style.display = "block";
+    });
+    
+    bookBtn.textContent = "Book Appointment";
+    bookBtn.href = "booking.html";
+  }
+  
+  // FILTER FUNCTION
+  function filterImages(category) {
+    items.forEach(item => {
+      if (category === 'all' || item.classList.contains(category)) {
+        item.style.display = "block";
+      } else {
+        item.style.display = "none";
+      }
+    });
+    
+    // UPDATE BUTTON TEXT + LINK
+    if (category === 'hair') {
+      bookBtn.textContent = "Book Hair Appointment";
+      bookBtn.href = "booking.html?service=hair";
+    }
+    else if (category === 'nails') {
+      bookBtn.textContent = "Book Nails Appointment";
+      bookBtn.href = "booking.html?service=nails";
+    }
+    else if (category === 'makeup') {
+      bookBtn.textContent = "Book Makeup Appointment";
+      bookBtn.href = "booking.html?service=makeup";
+    }
+    else {
+      bookBtn.textContent = "Book Appointment";
+      bookBtn.href = "booking.html";
+    }
+  }
+  
+  // RUN DEFAULT ON PAGE LOAD
+  setDefault();
+</script>
+</body>
+</html>
