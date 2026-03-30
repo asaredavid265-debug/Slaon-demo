@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Velvet Touch Salon</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <h2 class="logo">Velvet Touch</h2>
+    <ul class="nav-links">
+  <li><a href="index.html">Home</a></li>
+  <li><a href="gallery.html">Gallery</a></li>
+  <li><a href="booking.html">Book</a></li>
+  <li><a href="contact.html">Contact</a></li>
+</ul>
+    <div class="burger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </nav>
+
+  <!-- CONTACT SECTION -->
+  <section class="contact-page">
+    <h2>Contact Us</h2>
+    <p>Send us a message and we’ll get back to you shortly.</p>
+
+    <div class="contact-container">
+      <form id="contactForm">
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="email" id="email" placeholder="Your Email" required>
+        <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+
+      <div class="contact-info">
+        <p><strong>Address:</strong> Accra, Ghana</p>
+        <p><strong>Phone:</strong> +233 55 123 4567</p>
+        <p><strong>Email:</strong> info@velvettouch.com</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <h3>Velvet Touch Salon</h3>
+        <p>Luxury beauty services in Accra, Ghana</p>
+      </div>
+      <div class="footer-right">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="booking.html">Book</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer-bottom">© 2026 Velvet Touch Salon. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      let name = document.getElementById("name").value;
+      let email = document.getElementById("email").value;
+      let message = document.getElementById("message").value;
+
+      let whatsappMsg = `Hello, my name is ${name}. ${message} (Email: ${email})`;
+      let phone = "233551234567";
+      let url = `https://wa.me/${phone}?text=${encodeURIComponent(whatsappMsg)}`;
+      window.open(url, "_blank");
+    });
+  </script>
+  
+<script>
+  const burger = document.querySelector('.burger');
+  const nav = document.querySelector('nav ul.nav-links');
+  
+  burger.addEventListener('click', () => {
+    nav.classList.toggle('active');
+  });
+</script>
+  
+</body>
+</html>
