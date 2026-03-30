@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Velvet Touch Salon</title>
+  <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+<!--navbar-->
+<nav>
+  <h2 class="logo">velvet touch</h2>
+<ul class="nav-links">
+  <li><a href="index.html">Home</a></li>
+  <li><a href="gallery.html">Gallery</a></li>
+  <li><a href="booking.html">Book</a></li>
+  <li><a href="contact.html">Contact</a></li>
+</ul>
+  <div class="burger">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</nav>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+  
+  <div class="hero-content">
+    <h1>Glow Like Never Before ✨</h1>
+    
+    <p>
+      Discover premium hair styling, flawless makeup, and stunning nail designs
+      tailored just for you. Step into beauty, confidence, and elegance.
+    </p>
+    
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services">
+  <h2>Our Services</h2>
+  <p class="services-subtext">
+    We offer top-quality beauty services designed to bring out your best look.
+  </p>
+  
+  <div class="services-container">
+    
+    <!-- Hair -->
+    <div class="service-card">
+      <img src="images/hair.jpg" alt="Hair Styling">
+      <h3>Hair Styling</h3>
+      <p>Trendy braids, wigs, and styling tailored to your personality.</p>
+    </div>
+    
+    <!-- Nails -->
+    <div class="service-card">
+      <img src="images/nails.jpg" alt="Nails">
+      <h3>Nails</h3>
+      <p>Clean, elegant, and long-lasting nail designs.</p>
+    </div>
+    
+    <!-- Makeup -->
+    <div class="service-card">
+      <img src="images/makeup.jpg" alt="Makeup">
+      <h3>Makeup</h3>
+      <p>Flawless makeup for events, photoshoots, and everyday beauty.</p>
+    </div>
+    
+  </div>
+  
+  <!-- CTA -->
+  <div class="services-cta">
+    <p>Ready to transform your look? ✨</p>
+    <a href="gallery.html" class="btn-services">view amazing beauty art </a>
+  </div>
+</section>
+
+
+
+<section class="testimonials">
+  <h2>What Our Clients Say</h2>
+  
+  <div class="testimonial-wrapper">
+    <div class="testimonial-carousel" id="testimonialCarousel">
+      
+      <div class="testimonial">
+  <img src="images/client1.jpg" alt="">
+  
+  <div class="stars">★★★★★</div>
+  
+  <p>"Amazing service! My hair has never looked better."</p>
+  <h4>– Ama K.</h4>
+</div>  
+      
+      <div class="testimonial">
+        <img src="images/client2.jpg" alt="">
+        <p>"Very professional and friendly. I loved the experience!"</p>
+        <h4>– Kojo B.</h4>
+      </div>
+      
+      <div class="testimonial">
+        <img src="images/client3.jpg" alt="">
+        <p>"Best nails in town! Clean and beautiful work."</p>
+        <h4>– Adjoa S.</h4>
+      </div>
+      
+    </div>
+  </div>
+  
+  <!-- DOTS -->
+  <div class="dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+  
+<div class="testimonial-cta">
+  <p>Join our happy clients today ✨</p>
+  <a href="booking.html" class="btn-testimonials">Book Your Appointment</a>
+</div>
+</section>
+
+<section class="about">
+  <div class="about-container">
+    
+    <!-- TEXT SIDE -->
+    <div class="about-text">
+      <h2>About Our Salon</h2>
+      
+      <p>
+        At our salon, beauty meets excellence. We specialize in premium hair styling,
+        flawless makeup, and elegant nail designs tailored to your unique style.
+      </p>
+      
+      <p>
+        Our goal is simple — to make you feel confident, beautiful, and unforgettable
+        every time you walk out our doors.
+      </p>
+      
+      <!-- STATS (SOCIAL PROOF) -->
+      <div class="about-stats">
+        <div>
+          <h3>500+</h3>
+          <p>Happy Clients</p>
+        </div>
+        <div>
+          <h3>5★</h3>
+          <p>Top Rated</p>
+        </div>
+        <div>
+          <h3>3+</h3>
+          <p>Years Experience</p>
+        </div>
+      </div>
+<p class="social-proof-text">
+  Follow us on Instagram & TikTok to see our latest styles and transformations 🔥
+</p>
+      
+      <!-- SOCIAL LINKS -->
+      <div class="social-icons">
+        <a href="https://instagram.com/yourpage" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://tiktok.com/@yourpage" target="_blank">
+          <i class="fab fa-tiktok"></i>
+        </a>
+        <a href="https://facebook.com/yourpage" target="_blank">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="https://wa.me/233XXXXXXXXX" target="_blank">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </div>
+    </div>
+    
+    <!-- IMAGE SIDE -->
+    <div class="about-image">
+      <img src="images/salon.jpg" alt="Salon">
+    </div>
+    
+  </div>
+</section>
+
+
+<script>
+document.getElementById("bookingForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  let service = document.getElementById("service").value;
+  let date = document.getElementById("date").value;
+  let time = document.getElementById("time").value;
+
+  let message = `Hello, I want to book ${service} on ${date} at ${time}`;
+
+  let phone = "233551234567";
+
+  let url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+  window.open(url, "_blank");
+});
+</script>
+
+
+<footer class="footer">
+  <h3>Velvet Touch Salon</h3>
+  <p>Luxury Beauty Services in Accra</p>
+  
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  
+  <p class="copyright">
+    © 2026 Velvet Touch Salon. All rights reserved.
+  </p>
+<div class="social-icons">
+  <a href="#"><img src="images/instagram.png" alt="Instagram"></a>
+  <a href="#"><img src="images/facebook.png" alt="Facebook"></a>
+</div>
+</footer>
+  
+  
+<script>
+  const burger = document.querySelector('.burger');
+  const nav = document.querySelector('nav ul.nav-links');
+  
+  burger.addEventListener('click', () => {
+    nav.classList.toggle('active');
+  });
+</script>
+
+
+<script>
+  const carousel = document.getElementById("testimonialCarousel");
+  const dots = document.querySelectorAll(".dot");
+  
+  let index = 0;
+  const total = dots.length;
+  
+  /* MOVE SLIDE */
+  function showSlide(i) {
+    carousel.style.transform = `translateX(-${i * 100}%)`;
+    
+    dots.forEach(dot => dot.classList.remove("active"));
+    dots[i].classList.add("active");
+    
+    index = i;
+  }
+  
+  /* AUTO SLIDE */
+  setInterval(() => {
+    index = (index + 1) % total;
+    showSlide(index);
+  }, 4000);
+  
+  /* DOT CLICK */
+  dots.forEach((dot, i) => {
+    dot.addEventListener("click", () => showSlide(i));
+  });
+</script>
+</body>
+</html>
