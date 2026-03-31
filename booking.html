@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery - Velvet Touch Salon</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  
+<!--navbar-->
+<nav>
+<h2 class="logo">Velvet Touch</h2>
+<ul class="nav-links">
+  <li><a href="index.html">Home</a></li>
+  <li><a href="gallery.html">Gallery</a></li>
+  <li><a href="booking.html">Book</a></li>
+  <li><a href="contact.html">Contact</a></li>
+</ul>
+  <div class="burger">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</nav>
+
+
+<section class="booking-page">
+  <div class="booking-box">
+    <h2 id="selectedService">Book Your Appointment</h2>
+    <p>Select your service, date, and time</p>
+    
+    <form id="bookingForm">
+      
+      <!-- Customer Name -->
+      <input type="text" id="customerName" placeholder="Enter your name" required>
+      
+      <!-- Service Selection -->
+      <select id="service" required>
+        <option value="">Select Service</option>
+        <option>Hair Styling</option>
+        <option>Nails</option>
+        <option>Makeup</option>
+      </select>
+      
+      <!-- Date Input with Label -->
+      <label for="date">Select Date</label>
+      <input type="date" id="date" required>
+      
+      <!-- Time Selection -->
+      <select id="time" required>
+        <option value="">Select Time</option>
+        <option>9:00 AM</option>
+        <option>11:00 AM</option>
+        <option>1:00 PM</option>
+        <option>3:00 PM</option>
+      </select>
+      
+      <button type="submit" class="btn">Confirm Booking</button>
+    </form>
+    
+    <p id="successMsg" class="success"></p>
+  </div>
+</section>
+
+<!-- STYLE -->
+<style>
+  .booking-box {
+    text-align: center;
+    padding: 40px 20px;
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  .booking-box input,
+  .booking-box select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 14px;
+  }
+  
+  .booking-box label {
+    display: block;
+    text-align: left;
+    margin-top: 10px;
+    font-weight: 500;
+    font-size: 14px;
+  }
+  
+  .booking-box .btn {
+    padding: 12px 25px;
+    background: #25D366;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  .success {
+    margin-top: 10px;
+    color: green;
+    font-weight: 500;
+  }
+</style>
+
+<!-- SCRIPT -->
+<script>
+  document.getElementById("bookingForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    
+    let name = document.getElementById("customerName").value.trim();
+    let service = document.getElementById("service").value;
+    let date = document.getElementById("date").value;
+    let time = document.getElementById("time").value;
+    
+    if (!name || !service || !date || !time) {
+      alert("Please fill all fields");
+      return;
+    }
+    
+    // Format date as "March 30, 2026"
+    let dateParts = date.split("-");
+    let formattedDate = `${getMonthName(parseInt(dateParts[1]))} ${parseInt(dateParts[2])}, ${dateParts[0]}`;
+    
+    function getMonthName(monthNumber) {
+      const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      return months[monthNumber - 1];
+    }
+    
+    let message = `Hello, my name is ${name}. I want to book ${service} on ${formattedDate} at ${time}`;
+    
+    let phone = "233551234567"; // <-- REPLACE with your WhatsApp number
+    let url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    
+    document.getElementById("successMsg").innerText = "Redirecting to WhatsApp...";
+    
+    // Direct redirect (works on mobile and desktop with WhatsApp Web)
+    window.open(url, "_blank");
+  });
+  
+  // Optional: set min date to today so past dates can't be selected
+  const dateInput = document.getElementById("date");
+  const today = new Date().toISOString().split("T")[0];
+  dateInput.setAttribute("min", today);
+</script>
+
+
+<script>
+  const burger = document.querySelector('.burger');
+  const nav = document.querySelector('nav ul.nav-links');
+  
+  burger.addEventListener('click', () => {
+    nav.classList.toggle('active');
+  });
+</script>
+  
+  
+</body>
