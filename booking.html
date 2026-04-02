@@ -14,7 +14,7 @@
     nav ul.nav-links li a:hover { color:gold; }
     .burger { display:none; flex-direction:column; cursor:pointer; gap:5px; }
     .burger div { width:25px; height:3px; background:#333; }
-    @media(max-width:768px) { 
+    @media(max-width:768px){ 
       nav ul.nav-links { position:absolute; right:0; top:60px; background:#fff; flex-direction:column; width:100%; max-height:0; overflow:hidden; transition:max-height 0.3s ease; box-shadow:0 8px 15px rgba(0,0,0,0.1); }
       nav ul.nav-links.active { max-height:300px; }
       .burger { display:flex; }
@@ -43,9 +43,7 @@
     <li><a href="booking.html">Book</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
-  <div class="burger">
-    <div></div><div></div><div></div>
-  </div>
+  <div class="burger"><div></div><div></div><div></div></div>
 </nav>
 
 <!-- BOOKING -->
@@ -64,7 +62,9 @@
       </select>
       <label>Select Date</label>
       <input type="date" id="date" required>
-      <select id="time" required></select>
+      <select id="time" required>
+        <option value="" disabled selected>Select Time</option>
+      </select>
       <button type="submit" class="btn">Confirm Booking</button>
     </form>
 
@@ -77,7 +77,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"></script>
 
 <script>
-  // 🔹 Firebase Config
+  // Firebase config
   const firebaseConfig = {
     apiKey: "AIzaSyCrLjAWRW_SIWzmmtC7TNdFXbZhetr65HM",
     authDomain: "salon-booking-48c2c.firebaseapp.com",
@@ -95,19 +95,19 @@
     const dateInput = document.getElementById("date");
     const timeSelect = document.getElementById("time");
 
-    // 🔹 Minimum Date (2 days ahead)
-    let minDate = new Date();
+    // Minimum Date (2 days ahead)
+    const minDate = new Date();
     minDate.setDate(minDate.getDate() + 2);
     dateInput.min = minDate.toISOString().split("T")[0];
 
-    // 🔹 Generate Time Slots
+    // Generate time slots once
     function generateTimeSlots() {
-      timeSelect.innerHTML = '<option value="">Select Time</option>';
+      timeSelect.innerHTML = '<option value="" disabled selected>Select Time</option>';
       for (let hour = 10; hour <= 18; hour++) {
         let suffix = hour >= 12 ? "PM" : "AM";
         let h = hour > 12 ? hour - 12 : hour;
-        let time = `${h}:00 ${suffix}`;
-        let option = document.createElement("option");
+        const time = `${h}:00 ${suffix}`;
+        const option = document.createElement("option");
         option.value = time;
         option.textContent = time;
         timeSelect.appendChild(option);
@@ -115,7 +115,7 @@
     }
     generateTimeSlots();
 
-    // 🔹 Track fully booked dates
+    // Track fully booked dates
     let fullyBookedDates = new Set();
     async function refreshFullyBookedDates() {
       const snapshot = await db.collection("bookings").get();
@@ -132,7 +132,7 @@
     }
     refreshFullyBookedDates();
 
-    // 🔹 Update availability for selected date
+    // Update availability for selected date
     async function updateAvailability(date) {
       const snapshot = await db.collection("bookings").where("date","==",date).get();
       const taken = [];
@@ -147,21 +147,15 @@
           option.textContent = option.value;
         }
       });
-
-      if (taken.length >= 9) {
-        fullyBookedDates.add(date);
-        alert("❌ This date is fully booked");
-        dateInput.value = "";
-        timeSelect.innerHTML = '<option value="">Select Time</option>';
-      }
     }
 
-    // 🔹 Real-time listener per date
+    // Real-time listener per selected date
     let unsubscribe = null;
     dateInput.addEventListener("input", async function() {
       const selectedDate = this.value;
       const day = new Date(selectedDate).getDay();
 
+      // Block Sunday & Monday
       if (day === 0 || day === 1) {
         alert("Bookings available Tuesday to Saturday");
         this.value = "";
@@ -189,13 +183,12 @@
               option.textContent = option.value;
             }
           });
-          if (taken.length >= 9) fullyBookedDates.add(selectedDate);
         });
 
       await updateAvailability(selectedDate);
     });
 
-    // 🔹 Form Submit
+    // Form submit
     form.addEventListener("submit", async function(e) {
       e.preventDefault();
       const name = document.getElementById("name").value;
@@ -214,7 +207,7 @@
 
   });
 
-  // 🔹 Hamburger toggle
+  // Hamburger toggle
   const burger = document.querySelector(".burger");
   const nav = document.querySelector(".nav-links");
   burger.addEventListener("click", () => nav.classList.toggle("active"));
