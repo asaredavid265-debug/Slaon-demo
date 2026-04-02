@@ -3,163 +3,222 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gallery - Velvet Touch Salon</title>
+  <title>Book - Velvet Touch Salon</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; padding:0; }
+    nav { display:flex; justify-content:space-between; align-items:center; padding:15px 30px; background:#fff; box-shadow:0 4px 15px rgba(0,0,0,0.1); position:sticky; top:0; z-index:100; }
+    nav .logo { font-size:24px; font-weight:bold; color:gold; }
+    nav ul.nav-links { display:flex; gap:25px; list-style:none; }
+    nav ul.nav-links li a { text-decoration:none; color:#333; font-weight:500; transition:0.3s; }
+    nav ul.nav-links li a:hover { color:gold; }
+    .burger { display:none; flex-direction:column; cursor:pointer; gap:5px; }
+    .burger div { width:25px; height:3px; background:#333; }
+    @media(max-width:768px) { 
+      nav ul.nav-links { position:absolute; right:0; top:60px; background:#fff; flex-direction:column; width:100%; max-height:0; overflow:hidden; transition:max-height 0.3s ease; box-shadow:0 8px 15px rgba(0,0,0,0.1); }
+      nav ul.nav-links.active { max-height:300px; }
+      .burger { display:flex; }
+    }
+
+    /* BOOKING */
+    .booking-page { padding:80px 20px; display:flex; justify-content:center; background:#f9f9f9; }
+    .booking-box { background:white; padding:30px; border-radius:15px; max-width:400px; width:100%; box-shadow:0 10px 30px rgba(0,0,0,0.1); text-align:center; }
+    .booking-box h2 { margin-bottom:10px; }
+    .booking-box p { font-size:14px; color:#777; }
+    .booking-box input, .booking-box select { width:100%; padding:12px; margin:10px 0; border-radius:8px; border:1px solid #ccc; font-size:15px; }
+    .booking-box input:focus, .booking-box select:focus { border-color:gold; outline:none; }
+    .btn { padding:12px; width:100%; border-radius:25px; background:#25D366; color:white; border:none; cursor:pointer; margin-top:10px; }
+    #successMsg { margin-top:10px; color:green; font-weight:500; }
+  </style>
 </head>
 
 <body>
-  
-<!--navbar-->
+
+<!-- NAVBAR -->
 <nav>
-<h2 class="logo">Velvet Touch</h2>
-<ul class="nav-links">
-  <li><a href="index.html">Home</a></li>
-  <li><a href="gallery.html">Gallery</a></li>
-  <li><a href="booking.html">Book</a></li>
-  <li><a href="contact.html">Contact</a></li>
-</ul>
+  <h2 class="logo">Velvet Touch</h2>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="booking.html">Book</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
   <div class="burger">
-    <div></div>
-    <div></div>
-    <div></div>
+    <div></div><div></div><div></div>
   </div>
 </nav>
 
-
+<!-- BOOKING -->
 <section class="booking-page">
   <div class="booking-box">
-    <h2 id="selectedService">Book Your Appointment</h2>
+    <h2>Book Your Appointment</h2>
     <p>Select your service, date, and time</p>
-    
+
     <form id="bookingForm">
-      
-      <!-- Customer Name -->
-      <input type="text" id="customerName" placeholder="Enter your name" required>
-      
-      <!-- Service Selection -->
+      <input type="text" id="name" placeholder="Enter your name" required>
       <select id="service" required>
         <option value="">Select Service</option>
         <option>Hair Styling</option>
         <option>Nails</option>
         <option>Makeup</option>
       </select>
-      
-      <!-- Date Input with Label -->
-      <label for="date">Select Date</label>
+      <label>Select Date</label>
       <input type="date" id="date" required>
-      
-      <!-- Time Selection -->
-      <select id="time" required>
-        <option value="">Select Time</option>
-        <option>9:00 AM</option>
-        <option>11:00 AM</option>
-        <option>1:00 PM</option>
-        <option>3:00 PM</option>
-      </select>
-      
+      <select id="time" required></select>
       <button type="submit" class="btn">Confirm Booking</button>
     </form>
-    
-    <p id="successMsg" class="success"></p>
+
+    <p id="successMsg"></p>
   </div>
 </section>
 
-<!-- STYLE -->
-<style>
-  .booking-box {
-    text-align: center;
-    padding: 40px 20px;
-    max-width: 400px;
-    margin: auto;
-  }
-  
-  .booking-box input,
-  .booking-box select {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    outline: none;
-    font-size: 14px;
-  }
-  
-  .booking-box label {
-    display: block;
-    text-align: left;
-    margin-top: 10px;
-    font-weight: 500;
-    font-size: 14px;
-  }
-  
-  .booking-box .btn {
-    padding: 12px 25px;
-    background: #25D366;
-    color: white;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 10px;
-  }
-  
-  .success {
-    margin-top: 10px;
-    color: green;
-    font-weight: 500;
-  }
-</style>
-
-<!-- SCRIPT -->
-<script>
-  document.getElementById("bookingForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-    
-    let name = document.getElementById("customerName").value.trim();
-    let service = document.getElementById("service").value;
-    let date = document.getElementById("date").value;
-    let time = document.getElementById("time").value;
-    
-    if (!name || !service || !date || !time) {
-      alert("Please fill all fields");
-      return;
-    }
-    
-    // Format date as "March 30, 2026"
-    let dateParts = date.split("-");
-    let formattedDate = `${getMonthName(parseInt(dateParts[1]))} ${parseInt(dateParts[2])}, ${dateParts[0]}`;
-    
-    function getMonthName(monthNumber) {
-      const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-      return months[monthNumber - 1];
-    }
-    
-    let message = `Hello, my name is ${name}. I want to book ${service} on ${formattedDate} at ${time}`;
-    
-    let phone = "233551234567"; // <-- REPLACE with your WhatsApp number
-    let url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-    
-    document.getElementById("successMsg").innerText = "Redirecting to WhatsApp...";
-    
-    // Direct redirect (works on mobile and desktop with WhatsApp Web)
-    window.open(url, "_blank");
-  });
-  
-  // Optional: set min date to today so past dates can't be selected
-  const dateInput = document.getElementById("date");
-  const today = new Date().toISOString().split("T")[0];
-  dateInput.setAttribute("min", today);
-</script>
-
+<!-- FIREBASE SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"></script>
 
 <script>
-  const burger = document.querySelector('.burger');
-  const nav = document.querySelector('nav ul.nav-links');
-  
-  burger.addEventListener('click', () => {
-    nav.classList.toggle('active');
+  // 🔹 Firebase Config
+  const firebaseConfig = {
+    apiKey: "AIzaSyCrLjAWRW_SIWzmmtC7TNdFXbZhetr65HM",
+    authDomain: "salon-booking-48c2c.firebaseapp.com",
+    projectId: "salon-booking-48c2c",
+    storageBucket: "salon-booking-48c2c.appspot.com",
+    messagingSenderId: "281934132580",
+    appId: "1:281934132580:web:5f9ffcef416bd0506af671"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  document.addEventListener("DOMContentLoaded", function() {
+
+    const form = document.getElementById("bookingForm");
+    const dateInput = document.getElementById("date");
+    const timeSelect = document.getElementById("time");
+
+    // 🔹 Minimum Date (2 days ahead)
+    let minDate = new Date();
+    minDate.setDate(minDate.getDate() + 2);
+    dateInput.min = minDate.toISOString().split("T")[0];
+
+    // 🔹 Generate Time Slots
+    function generateTimeSlots() {
+      timeSelect.innerHTML = '<option value="">Select Time</option>';
+      for (let hour = 10; hour <= 18; hour++) {
+        let suffix = hour >= 12 ? "PM" : "AM";
+        let h = hour > 12 ? hour - 12 : hour;
+        let time = `${h}:00 ${suffix}`;
+        let option = document.createElement("option");
+        option.value = time;
+        option.textContent = time;
+        timeSelect.appendChild(option);
+      }
+    }
+    generateTimeSlots();
+
+    // 🔹 Track fully booked dates
+    let fullyBookedDates = new Set();
+    async function refreshFullyBookedDates() {
+      const snapshot = await db.collection("bookings").get();
+      const dateMap = {};
+      snapshot.forEach(doc => {
+        const b = doc.data();
+        if (!dateMap[b.date]) dateMap[b.date] = [];
+        dateMap[b.date].push(b.time);
+      });
+      fullyBookedDates.clear();
+      Object.keys(dateMap).forEach(date => {
+        if (dateMap[date].length >= 9) fullyBookedDates.add(date);
+      });
+    }
+    refreshFullyBookedDates();
+
+    // 🔹 Update availability for selected date
+    async function updateAvailability(date) {
+      const snapshot = await db.collection("bookings").where("date","==",date).get();
+      const taken = [];
+      snapshot.forEach(doc => taken.push(doc.data().time));
+
+      Array.from(timeSelect.options).forEach(option => {
+        if (taken.includes(option.value)) {
+          option.disabled = true;
+          option.textContent = option.value + " (Booked)";
+        } else {
+          option.disabled = false;
+          option.textContent = option.value;
+        }
+      });
+
+      if (taken.length >= 9) {
+        fullyBookedDates.add(date);
+        alert("❌ This date is fully booked");
+        dateInput.value = "";
+        timeSelect.innerHTML = '<option value="">Select Time</option>';
+      }
+    }
+
+    // 🔹 Real-time listener per date
+    let unsubscribe = null;
+    dateInput.addEventListener("input", async function() {
+      const selectedDate = this.value;
+      const day = new Date(selectedDate).getDay();
+
+      if (day === 0 || day === 1) {
+        alert("Bookings available Tuesday to Saturday");
+        this.value = "";
+        return;
+      }
+
+      await refreshFullyBookedDates();
+      if (fullyBookedDates.has(selectedDate)) {
+        alert("❌ This date is fully booked. Please select another day.");
+        this.value = "";
+        return;
+      }
+
+      if (unsubscribe) unsubscribe();
+      unsubscribe = db.collection("bookings").where("date","==",selectedDate)
+        .onSnapshot(snapshot => {
+          const taken = [];
+          snapshot.forEach(doc => taken.push(doc.data().time));
+          Array.from(timeSelect.options).forEach(option => {
+            if (taken.includes(option.value)) {
+              option.disabled = true;
+              option.textContent = option.value + " (Booked)";
+            } else {
+              option.disabled = false;
+              option.textContent = option.value;
+            }
+          });
+          if (taken.length >= 9) fullyBookedDates.add(selectedDate);
+        });
+
+      await updateAvailability(selectedDate);
+    });
+
+    // 🔹 Form Submit
+    form.addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const service = document.getElementById("service").value;
+      const date = dateInput.value;
+      const time = timeSelect.value;
+      if (!name || !service || !date || !time) return alert("Fill all fields");
+
+      const bookingRef = db.collection("bookings").doc(date + "_" + time);
+      const docSnap = await bookingRef.get();
+      if (docSnap.exists) return alert("❌ This time is already booked");
+
+      await bookingRef.set({ name, service, date, time, createdAt: new Date() });
+      document.getElementById("successMsg").innerText = "✅ Booking confirmed!";
+    });
+
   });
+
+  // 🔹 Hamburger toggle
+  const burger = document.querySelector(".burger");
+  const nav = document.querySelector(".nav-links");
+  burger.addEventListener("click", () => nav.classList.toggle("active"));
 </script>
-  
-  
+
 </body>
+</html>
