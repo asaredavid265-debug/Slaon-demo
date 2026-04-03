@@ -1,40 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book - Velvet Touch Salon</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    body { font-family: Arial, sans-serif; margin:0; padding:0; }
-    nav { display:flex; justify-content:space-between; align-items:center; padding:15px 30px; background:#fff; box-shadow:0 4px 15px rgba(0,0,0,0.1); position:sticky; top:0; z-index:100; }
-    nav .logo { font-size:24px; font-weight:bold; color:gold; }
-    nav ul.nav-links { display:flex; gap:25px; list-style:none; }
-    nav ul.nav-links li a { text-decoration:none; color:#333; font-weight:500; transition:0.3s; }
-    nav ul.nav-links li a:hover { color:gold; }
-    .burger { display:none; flex-direction:column; cursor:pointer; gap:5px; }
-    .burger div { width:25px; height:3px; background:#333; }
-    @media(max-width:768px){ 
-      nav ul.nav-links { position:absolute; right:0; top:60px; background:#fff; flex-direction:column; width:100%; max-height:0; overflow:hidden; transition:max-height 0.3s ease; box-shadow:0 8px 15px rgba(0,0,0,0.1); }
-      nav ul.nav-links.active { max-height:300px; }
-      .burger { display:flex; }
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book - Velvet Touch Salon</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body { font-family: Arial, sans-serif; background: #f9f9f9; }
 
-    /* BOOKING */
-    .booking-page { padding:80px 20px; display:flex; justify-content:center; background:#f9f9f9; }
-    .booking-box { background:white; padding:30px; border-radius:15px; max-width:400px; width:100%; box-shadow:0 10px 30px rgba(0,0,0,0.1); text-align:center; }
-    .booking-box h2 { margin-bottom:10px; }
-    .booking-box p { font-size:14px; color:#777; }
-    .booking-box input, .booking-box select { width:100%; padding:12px; margin:10px 0; border-radius:8px; border:1px solid #ccc; font-size:15px; }
-    .booking-box input:focus, .booking-box select:focus { border-color:gold; outline:none; }
-    .btn { padding:12px; width:100%; border-radius:25px; background:#25D366; color:white; border:none; cursor:pointer; margin-top:10px; }
-    #successMsg { margin-top:10px; color:green; font-weight:500; }
-  </style>
+/* NAVBAR */
+nav { display:flex; justify-content:space-between; align-items:center; padding:15px 30px; background:#fff; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
+nav .logo { font-size:24px; font-weight:bold; color:gold; }
+nav ul.nav-links { display:flex; gap:25px; list-style:none; }
+nav ul.nav-links li a { text-decoration:none; color:#333; font-weight:500; transition:0.3s; }
+nav ul.nav-links li a:hover { color:gold; }
+.burger { display:none; flex-direction:column; cursor:pointer; gap:5px; }
+.burger div { width:25px; height:3px; background:#333; }
+@media(max-width:768px){
+  nav ul.nav-links { position:absolute; right:0; top:60px; background:#fff; flex-direction:column; width:100%; max-height:0; overflow:hidden; transition:max-height 0.3s ease; box-shadow:0 8px 15px rgba(0,0,0,0.1); }
+  nav ul.nav-links.active { max-height:300px; }
+  .burger { display:flex; }
+}
+
+/* BOOKING FORM */
+.booking-page { padding:80px 20px; display:flex; justify-content:center; }
+.booking-box { background:white; padding:30px; border-radius:15px; max-width:400px; width:100%; box-shadow:0 10px 30px rgba(0,0,0,0.1); text-align:center; }
+.booking-box input, .booking-box select { width:100%; padding:12px; margin:10px 0; border-radius:8px; border:1px solid #ccc; font-size:15px; }
+.booking-box input:focus, .booking-box select:focus { border-color:gold; outline:none; }
+.booking-box label { display:block; text-align:left; font-weight:bold; margin-top:10px; }
+.btn { padding:12px; width:100%; border-radius:25px; background:#25D366; color:white; border:none; cursor:pointer; margin-top:10px; }
+#successMsg { margin-top:10px; color:green; font-weight:500; }
+
+/* DASHBOARD */
+.dashboard { margin:40px auto; max-width:800px; }
+.dashboard h2 { margin-bottom:15px; }
+.dashboard-date { border:1px solid #ccc; border-radius:10px; padding:15px; margin-bottom:15px; background:white; }
+.time-slot { display:inline-block; padding:5px 10px; margin:3px; border-radius:5px; font-size:14px; }
+.time-slot.available { background-color:#d4edda; color:#155724; }
+.time-slot.booked { background-color:#f8d7da; color:#721c24; }
+.non-working { background-color:#eee; color:#aaa; cursor:not-allowed; }
+
+/* DATE FILTER INPUT */
+#dashboardDate { padding:10px; border-radius:8px; border:1px solid #ccc; font-weight:bold; width:200px; margin-bottom:15px; }
+</style>
 </head>
-
 <body>
 
-<!-- NAVBAR -->
 <nav>
   <h2 class="logo">Velvet Touch</h2>
   <ul class="nav-links">
@@ -46,12 +57,11 @@
   <div class="burger"><div></div><div></div><div></div></div>
 </nav>
 
-<!-- BOOKING -->
+<!-- BOOKING FORM -->
 <section class="booking-page">
   <div class="booking-box">
     <h2>Book Your Appointment</h2>
     <p>Select your service, date, and time</p>
-
     <form id="bookingForm">
       <input type="text" id="name" placeholder="Enter your name" required>
       <select id="service" required>
@@ -60,158 +70,158 @@
         <option>Nails</option>
         <option>Makeup</option>
       </select>
-      <label>Select Date</label>
+      <label for="date">Select Date</label>
       <input type="date" id="date" required>
-      <select id="time" required>
-        <option value="" disabled selected>Select Time</option>
-      </select>
+      <select id="time" required></select>
       <button type="submit" class="btn">Confirm Booking</button>
     </form>
-
     <p id="successMsg"></p>
   </div>
 </section>
 
-<!-- FIREBASE SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"></script>
+<!-- DASHBOARD -->
+<section class="dashboard">
+  <h2>Booking Dashboard (Next 7 Days)</h2>
+  <label for="dashboardDate">Filter by Date:</label>
+  <input type="date" id="dashboardDate">
+  <div id="dashboardContainer"></div>
+</section>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
 <script>
-  // Firebase config
-  const firebaseConfig = {
-    apiKey: "AIzaSyCrLjAWRW_SIWzmmtC7TNdFXbZhetr65HM",
-    authDomain: "salon-booking-48c2c.firebaseapp.com",
-    projectId: "salon-booking-48c2c",
-    storageBucket: "salon-booking-48c2c.appspot.com",
-    messagingSenderId: "281934132580",
-    appId: "1:281934132580:web:5f9ffcef416bd0506af671"
-  };
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
+const firebaseConfig = {
+  apiKey: "AIzaSyCrLjAWRW_SIWzmmtC7TNdFXbZhetr65HM",
+  authDomain: "salon-booking-48c2c.firebaseapp.com",
+  projectId: "salon-booking-48c2c",
+  storageBucket: "salon-booking-48c2c.firebasestorage.app",
+  messagingSenderId: "281934132580",
+  appId: "1:281934132580:web:5f9ffcef416bd0506af671"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
-  document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
+  const form = document.getElementById("bookingForm");
+  const dateInput = document.getElementById("date");
+  const timeSelect = document.getElementById("time");
+  const dashboardContainer = document.getElementById("dashboardContainer");
+  const dashboardDate = document.getElementById("dashboardDate");
 
-    const form = document.getElementById("bookingForm");
-    const dateInput = document.getElementById("date");
-    const timeSelect = document.getElementById("time");
+  const services = ["Hair Styling", "Nails", "Makeup"];
+  const timeSlots = [];
+  for(let h=10; h<=18; h+=2){ 
+    let suffix = h >= 12 ? "PM" : "AM";
+    let hour = h > 12 ? h-12 : h;
+    timeSlots.push(`${hour}:00 ${suffix}`);
+  }
 
-    // Minimum Date (2 days ahead)
-    const minDate = new Date();
-    minDate.setDate(minDate.getDate() + 2);
-    dateInput.min = minDate.toISOString().split("T")[0];
+  // Minimum date 2 days ahead
+  let minDate = new Date(); minDate.setDate(minDate.getDate()+2);
+  dateInput.min = minDate.toISOString().split("T")[0];
+  dashboardDate.min = minDate.toISOString().split("T")[0];
 
-    // Generate time slots once
-    function generateTimeSlots() {
-      timeSelect.innerHTML = '<option value="" disabled selected>Select Time</option>';
-      for (let hour = 10; hour <= 18; hour++) {
-        let suffix = hour >= 12 ? "PM" : "AM";
-        let h = hour > 12 ? hour - 12 : hour;
-        const time = `${h}:00 ${suffix}`;
-        const option = document.createElement("option");
-        option.value = time;
-        option.textContent = time;
-        timeSelect.appendChild(option);
-      }
-    }
-    generateTimeSlots();
-
-    // Track fully booked dates
-    let fullyBookedDates = new Set();
-    async function refreshFullyBookedDates() {
-      const snapshot = await db.collection("bookings").get();
-      const dateMap = {};
-      snapshot.forEach(doc => {
-        const b = doc.data();
-        if (!dateMap[b.date]) dateMap[b.date] = [];
-        dateMap[b.date].push(b.time);
-      });
-      fullyBookedDates.clear();
-      Object.keys(dateMap).forEach(date => {
-        if (dateMap[date].length >= 9) fullyBookedDates.add(date);
-      });
-    }
-    refreshFullyBookedDates();
-
-    // Update availability for selected date
-    async function updateAvailability(date) {
-      const snapshot = await db.collection("bookings").where("date","==",date).get();
-      const taken = [];
-      snapshot.forEach(doc => taken.push(doc.data().time));
-
-      Array.from(timeSelect.options).forEach(option => {
-        if (taken.includes(option.value)) {
-          option.disabled = true;
-          option.textContent = option.value + " (Booked)";
-        } else {
-          option.disabled = false;
-          option.textContent = option.value;
-        }
-      });
-    }
-
-    // Real-time listener per selected date
-    let unsubscribe = null;
-    dateInput.addEventListener("input", async function() {
-      const selectedDate = this.value;
-      const day = new Date(selectedDate).getDay();
-
-      // Block Sunday & Monday
-      if (day === 0 || day === 1) {
-        alert("Bookings available Tuesday to Saturday");
-        this.value = "";
-        return;
-      }
-
-      await refreshFullyBookedDates();
-      if (fullyBookedDates.has(selectedDate)) {
-        alert("❌ This date is fully booked. Please select another day.");
-        this.value = "";
-        return;
-      }
-
-      if (unsubscribe) unsubscribe();
-      unsubscribe = db.collection("bookings").where("date","==",selectedDate)
-        .onSnapshot(snapshot => {
-          const taken = [];
-          snapshot.forEach(doc => taken.push(doc.data().time));
-          Array.from(timeSelect.options).forEach(option => {
-            if (taken.includes(option.value)) {
-              option.disabled = true;
-              option.textContent = option.value + " (Booked)";
-            } else {
-              option.disabled = false;
-              option.textContent = option.value;
-            }
-          });
-        });
-
-      await updateAvailability(selectedDate);
+  function generateTimeSelect() {
+    timeSelect.innerHTML = '<option value="">Select Time</option>';
+    timeSlots.forEach(t=>{
+      let opt=document.createElement("option");
+      opt.value=t; opt.textContent=t;
+      timeSelect.appendChild(opt);
     });
+  }
+  generateTimeSelect();
 
-    // Form submit
-    form.addEventListener("submit", async function(e) {
-      e.preventDefault();
-      const name = document.getElementById("name").value;
-      const service = document.getElementById("service").value;
-      const date = dateInput.value;
-      const time = timeSelect.value;
-      if (!name || !service || !date || !time) return alert("Fill all fields");
-
-      const bookingRef = db.collection("bookings").doc(date + "_" + time);
-      const docSnap = await bookingRef.get();
-      if (docSnap.exists) return alert("❌ This time is already booked");
-
-      await bookingRef.set({ name, service, date, time, createdAt: new Date() });
-      document.getElementById("successMsg").innerText = "✅ Booking confirmed!";
+  async function updateTimeSelect(date, service){
+    const snapshot = await db.collection("bookings")
+      .where("date","==",date)
+      .where("service","==",service).get();
+    let taken = snapshot.docs.map(d=>d.data().time);
+    Array.from(timeSelect.options).forEach(opt=>{
+      if(opt.value==="") return;
+      if(taken.includes(opt.value)){
+        opt.disabled = true; opt.textContent=opt.value+" (Booked)";
+      } else {
+        opt.disabled = false; opt.textContent=opt.value;
+      }
     });
+  }
 
+  dateInput.addEventListener("input", async function(){
+    let day = new Date(this.value).getDay();
+    if(day===0||day===1){ alert("Bookings available Tuesday-Saturday"); this.value=""; generateTimeSelect(); return;}
+    generateTimeSelect();
+    if(document.getElementById("service").value)
+      await updateTimeSelect(this.value, document.getElementById("service").value);
   });
 
-  // Hamburger toggle
-  const burger = document.querySelector(".burger");
-  const nav = document.querySelector(".nav-links");
-  burger.addEventListener("click", () => nav.classList.toggle("active"));
-</script>
+  document.getElementById("service").addEventListener("change", async function(){
+    if(dateInput.value)
+      await updateTimeSelect(dateInput.value, this.value);
+  });
 
+  form.addEventListener("submit", async function(e){
+    e.preventDefault();
+    const name = document.getElementById("name").value.trim();
+    const service = document.getElementById("service").value;
+    const date = dateInput.value;
+    const time = timeSelect.value;
+    if(!name||!service||!date||!time){ alert("Fill all fields"); return;}
+    const bookingRef = db.collection("bookings").doc(date+"_"+time+"_"+service);
+    const docSnap = await bookingRef.get();
+    if(docSnap.exists){ alert("❌ Already booked"); return;}
+    await bookingRef.set({name, service, date, time, createdAt:new Date()});
+
+    // WhatsApp redirect
+    const formattedDate = new Date(date).toLocaleDateString("en-US",{year:"numeric", month:"long", day:"numeric"});
+    const message = `Hello, my name is ${name}. I would like to book ${service} on ${formattedDate} at ${time}.`;
+    const phone = "233537246313";
+    setTimeout(()=>{ window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`,"_blank"); },1000);
+
+    document.getElementById("successMsg").innerText="✅ Booking confirmed!";
+    generateTimeSelect();
+  });
+
+  async function renderDashboard(filterDate=null){
+    dashboardContainer.innerHTML="";
+    let startDate = new Date();
+    for(let i=0;i<7;i++){
+      let d = new Date(); d.setDate(startDate.getDate()+i);
+      let dateStr = d.toISOString().split("T")[0];
+      if(filterDate && filterDate!==dateStr) continue;
+      let day = d.getDay();
+      let div = document.createElement("div"); div.classList.add("dashboard-date");
+      if(day===0||day===1) div.classList.add("non-working");
+      let title = document.createElement("h4"); title.textContent=d.toDateString(); div.appendChild(title);
+
+      services.forEach(async service=>{
+        let snapshot = await db.collection("bookings").where("date","==",dateStr).where("service","==",service).get();
+        let bookedTimes = snapshot.docs.map(doc=>doc.data().time);
+        let serviceDiv = document.createElement("div");
+        serviceDiv.innerHTML=`<strong>${service}:</strong> `;
+        timeSlots.forEach(t=>{
+          let span = document.createElement("span"); span.classList.add("time-slot");
+          if(day===0||day===1){ span.classList.add("non-working"); }
+          else if(bookedTimes.includes(t)){ span.classList.add("booked"); span.textContent=t; }
+          else { span.classList.add("available"); span.textContent=t; }
+          serviceDiv.appendChild(span);
+        });
+        div.appendChild(serviceDiv);
+      });
+      dashboardContainer.appendChild(div);
+    }
+  }
+  renderDashboard();
+  dashboardDate.addEventListener("input", ()=>renderDashboard(dashboardDate.value));
+  db.collection("bookings").onSnapshot(()=>renderDashboard(dashboardDate.value));
+
+});
+
+// Hamburger
+const burger = document.querySelector(".burger");
+const nav = document.querySelector(".nav-links");
+burger.addEventListener("click",()=>nav.classList.toggle("active"));
+</script>
 </body>
 </html>
