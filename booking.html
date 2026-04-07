@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -228,7 +228,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   // -------------------------
-  // Booking form submission
+  // Booking form submission + WhatsApp auto-send
   // -------------------------
   form.addEventListener("submit", async function(e) {
     e.preventDefault();
@@ -242,10 +242,26 @@ document.addEventListener("DOMContentLoaded", function() {
     const docSnap = await bookingRef.get();
     if (docSnap.exists) { alert("❌ Already booked"); return; }
 
+    // Save booking in Firebase
     await bookingRef.set({ name, service, date, time, createdAt: new Date() });
 
+    // Show success message
     document.getElementById("successMsg").innerText = "✅ Booking confirmed!";
+
+    // Generate fresh time options
     generateTimeSelect();
+
+    // -------------------------
+    // WhatsApp redirect
+    // -------------------------
+    const phoneNumber = "233537246313"; // Replace with your salon number
+    const formattedDate = new Date(date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+    const message = `Hello! My name is ${name}. I would like to book ${service} on ${formattedDate} at ${time}.`;
+    const encodedMessage = encodeURIComponent(message);
+    // Open WhatsApp in new tab
+    setTimeout(() => {
+      window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, "_blank");
+    }, 500);
   });
 
   // -------------------------
@@ -295,7 +311,7 @@ document.addEventListener("DOMContentLoaded", function() {
   db.collection("bookings").onSnapshot(() => renderDashboard(dashboardDate.value));
 
   // -------------------------
-  // Hamburger menu
+  // Hamburger menu toggle
   // -------------------------
   const burger = document.querySelector(".burger");
   const nav = document.querySelector(".nav-links");
